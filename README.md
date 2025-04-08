@@ -1,6 +1,6 @@
-# MCP Appium - Model Context Protocol for Appium
+# MCP Appium - Model Context Protocol for robotframework
 
-A Python implementation of Model Context Protocol (MCP) for Appium to enable mobile automation testing.
+A Python implementation of Model Context Protocol (MCP) for robotframwork to enable mobile automation testing.
 
 ## Overview
 
