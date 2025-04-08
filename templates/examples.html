@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">MCP Appium Examples</h1>
+    <p class="lead">Browse through example scripts to learn how to use MCP Appium.</p>
+
+    <!-- Featured Example Section -->
+    <div class="row my-4">
+        <div class="col-lg-12">
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Featured Example</h3>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Comprehensive Appium API Example</h4>
+                    <p class="card-text">
+                        This example demonstrates a comprehensive set of Appium API methods available in the MCP Appium implementation. 
+                        It covers all major functionality including session management, element interaction, touch actions, device manipulation, 
+                        app management, context switching, and more.
+                    </p>
+                    <div class="mt-3">
+                        <a href="{{ url_for('show_example', filename='comprehensive_appium_example.py') }}" class="btn btn-primary me-2">
+                            <i class="bi bi-code-slash"></i> View Code
+                        </a>
+                        <a href="#" class="btn btn-outline-secondary">
+                            <i class="bi bi-play-fill"></i> Run Example
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <h3>Example Categories</h3>
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" type="button" role="tab">
+                        All Examples
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-platform-tab" data-bs-toggle="pill" data-bs-target="#pills-platform" type="button" role="tab">
+                        Platform-Specific
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-ai-tab" data-bs-toggle="pill" data-bs-target="#pills-ai" type="button" role="tab">
+                        AI Integration
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-advanced-tab" data-bs-toggle="pill" data-bs-target="#pills-advanced" type="button" role="tab">
+                        Advanced Features
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- All Examples -->
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-all" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% if examples %}
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                            {% for file in examples %}
+                                <div class="col">
+                                    <div class="card h-100">
+                                        <div class="card-header">
+                                            <h5 class="card-title">{{ file }}</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            {% if file == 'android_example.py' %}
+                                                <p class="card-text">Basic Android example demonstrating element interaction and navigation.</p>
+                                                <span class="badge bg-success">Android</span>
+                                            {% elif file == 'ios_example.py' %}
+                                                <p class="card-text">Basic iOS example demonstrating element interaction and iOS-specific features.</p>
+                                                <span class="badge bg-primary">iOS</span>
+                                            {% elif file == 'comprehensive_appium_example.py' %}
+                                                <p class="card-text">Comprehensive example covering all Appium API methods.</p>
+                                                <span class="badge bg-danger">Featured</span>
+                                                <span class="badge bg-success">Android</span>
+                                                <span class="badge bg-primary">iOS</span>
+                                            {% elif 'ai_' in file or 'openai' in file or 'ollama' in file %}
+                                                <p class="card-text">Example demonstrating AI integration capabilities.</p>
+                                                <span class="badge bg-warning text-dark">AI</span>
+                                            {% elif 'docker' in file or 'sauce_labs' in file %}
+                                                <p class="card-text">Example demonstrating integration with test infrastructure.</p>
+                                                <span class="badge bg-info">Infrastructure</span>
+                                            {% elif 'code_generation' in file %}
+                                                <p class="card-text">Example demonstrating code generation in multiple languages.</p>
+                                                <span class="badge bg-secondary">Code Gen</span>
+                                            {% else %}
+                                                <p class="card-text">Example demonstrating MCP Appium functionality.</p>
+                                            {% endif %}
+                                        </div>
+                                        <div class="card-footer">
+                                            <a href="{{ url_for('show_example', filename=file) }}" class="btn btn-primary">View Example</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info">No example files found.</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Platform-Specific Examples -->
+        <div class="tab-pane fade" id="pills-platform" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card mb-4">
+                        <div class="card-header bg-success text-white">
+                            <h4 class="mb-0">Android Examples</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                {% for file in examples %}
+                                    {% if 'android' in file or file == 'comprehensive_appium_example.py' %}
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <a href="{{ url_for('show_example', filename=file) }}">{{ file }}</a>
+                                            <span class="badge bg-success rounded-pill">Android</span>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h4 class="mb-0">iOS Examples</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                {% for file in examples %}
+                                    {% if 'ios' in file or file == 'comprehensive_appium_example.py' %}
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <a href="{{ url_for('show_example', filename=file) }}">{{ file }}</a>
+                                            <span class="badge bg-primary rounded-pill">iOS</span>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Integration Examples -->
+        <div class="tab-pane fade" id="pills-ai" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb-4">
+                        <div class="card-header bg-warning text-dark">
+                            <h4 class="mb-0">AI Integration Examples</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                {% for file in examples %}
+                                    {% if 'ai_' in file or 'openai' in file or 'ollama' in file %}
+                                        <div class="col-md-6">
+                                            <div class="card mb-3">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ file }}</h5>
+                                                    {% if 'openai' in file %}
+                                                        <p class="card-text">Example demonstrating integration with OpenAI models.</p>
+                                                        <span class="badge bg-info">OpenAI</span>
+                                                    {% elif 'ollama' in file %}
+                                                        <p class="card-text">Example demonstrating integration with local Ollama models.</p>
+                                                        <span class="badge bg-secondary">Ollama</span>
+                                                    {% else %}
+                                                        <p class="card-text">Example demonstrating AI integration capabilities.</p>
+                                                        <span class="badge bg-warning text-dark">AI</span>
+                                                    {% endif %}
+                                                    <div class="mt-2">
+                                                        <a href="{{ url_for('show_example', filename=file) }}" class="btn btn-outline-primary btn-sm">View Example</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Features -->
+        <div class="tab-pane fade" id="pills-advanced" role="tabpanel">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card mb-4">
+                        <div class="card-header bg-secondary text-white">
+                            <h4 class="mb-0">Advanced Features</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                {% for file in examples %}
+                                    {% if 'docker' in file or 'sauce_labs' in file or 'code_generation' in file or file == 'comprehensive_appium_example.py' %}
+                                        <div class="col-md-6">
+                                            <div class="card mb-3">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ file }}</h5>
+                                                    {% if 'docker' in file %}
+                                                        <p class="card-text">Example demonstrating Docker integration.</p>
+                                                        <span class="badge bg-info">Docker</span>
+                                                    {% elif 'sauce_labs' in file %}
+                                                        <p class="card-text">Example demonstrating SauceLabs integration.</p>
+                                                        <span class="badge bg-danger">Sauce Labs</span>
+                                                    {% elif 'code_generation' in file %}
+                                                        <p class="card-text">Example demonstrating code generation.</p>
+                                                        <span class="badge bg-secondary">Code Gen</span>
+                                                    {% elif file == 'comprehensive_appium_example.py' %}
+                                                        <p class="card-text">Comprehensive example covering all Appium API methods.</p>
+                                                        <span class="badge bg-warning text-dark">Featured</span>
+                                                    {% endif %}
+                                                    <div class="mt-2">
+                                                        <a href="{{ url_for('show_example', filename=file) }}" class="btn btn-outline-primary btn-sm">View Example</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

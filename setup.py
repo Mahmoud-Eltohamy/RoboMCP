@@ -1,0 +1,35 @@
+from setuptools import setup, find_packages
+
+setup(
+    name="mcp-appium",
+    version="0.1.0",
+    description="Model Context Protocol Implementation for Appium Mobile Testing",
+    author="MCP Appium Team",
+    author_email="info@example.com",
+    url="https://github.com/example/mcp-appium",
+    packages=find_packages(),
+    install_requires=[
+        "requests>=2.25.0",
+        "openai>=1.0.0",
+        "google-generativeai>=0.3.0",
+        "ollama>=0.1.0",
+        "flask>=2.0.0",
+        "gunicorn>=20.0.0",
+        "mcp>=1.6.0",
+        "uvicorn>=0.34.0",
+        "pydantic>=2.0.0", 
+    ],
+    classifiers=[
+        "Development Status :: 3 - Alpha",
+        "Intended Audience :: Developers",
+        "Topic :: Software Development :: Testing",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    python_requires=">=3.8",
+)

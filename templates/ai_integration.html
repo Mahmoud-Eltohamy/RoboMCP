@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">MCP Appium AI Integration</h1>
+    <p class="lead">Explore the AI capabilities integrated into the MCP Appium implementation.</p>
+
+    <div class="row mt-4">
+        <div class="col-lg-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>AI Providers</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="card-title mb-0">OpenAI</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Integration with OpenAI GPT models for advanced natural language understanding and code generation.</p>
+                                    <ul class="list-unstyled">
+                                        <li><i class="bi bi-check-circle-fill text-success"></i> GPT-4 support</li>
+                                        <li><i class="bi bi-check-circle-fill text-success"></i> Multi-shot prompting</li>
+                                        <li><i class="bi bi-check-circle-fill text-success"></i> Code generation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-header bg-danger text-white">
+                                    <h5 class="card-title mb-0">Google Gemini</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Integration with Google Gemini AI for efficient and cost-effective test generation.</p>
+                                    <ul class="list-unstyled">
+                                        <li><i class="bi bi-check-circle-fill text-success"></i> Gemini Pro support</li>
+                                        <li><i class="bi bi-check-circle-fill text-success"></i> Multi-modal inputs</li>
+                                        <li><i class="bi bi-check-circle-fill text-success"></i> Test planning</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-header bg-warning text-dark">
+                                    <h5 class="card-title mb-0">Hugging Face</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Integration with open-source models from the Hugging Face ecosystem.</p>
+                                    <ul class="list-unstyled">
+                                        <li><i class="bi bi-check-circle-fill text-success"></i> Open-source models</li>
+                                        <li><i class="bi bi-check-circle-fill text-success"></i> Custom fine-tuning</li>
+                                        <li><i class="bi bi-check-circle-fill text-success"></i> Specialized models</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-header bg-info text-white">
+                                    <h5 class="card-title mb-0">Ollama</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Run powerful LLMs locally with Ollama integration for privacy and offline capabilities.</p>
+                                    <ul class="list-unstyled">
+                                        <li><i class="bi bi-check-circle-fill text-success"></i> Local execution</li>
+                                        <li><i class="bi bi-check-circle-fill text-success"></i> Privacy-focused</li>
+                                        <li><i class="bi bi-check-circle-fill text-success"></i> No API costs</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>AI Capabilities</h3>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="aiCapabilitiesAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Screen Analysis
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#aiCapabilitiesAccordion">
+                                <div class="accordion-body">
+                                    <p>The AI can analyze the current screen of a mobile application to identify UI elements, understand layout structures, and detect interactive components.</p>
+                                    <pre><code class="language-python">from mcp_appium import client, ai_integration
+
+# Initialize client and AI integration
+appium_client = client.AppiumClient(...)
+session = appium_client.create_session()
+ai = ai_integration.MCPAIIntegration(provider="openai")
+
+# Get screen description
+screenshot = session.get_screenshot()
+page_source = session.get_page_source()
+description = ai.describe_screen(screenshot, page_source)
+
+print(description)
+# Output: "The screen shows a login form with username and password fields,
+# a Login button, and a Forgot Password? link at the bottom..."</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Test Script Generation
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#aiCapabilitiesAccordion">
+                                <div class="accordion-body">
+                                    <p>Generate complete test scripts based on natural language descriptions of testing goals. Support for multiple programming languages.</p>
+                                    <pre><code class="language-python">from mcp_appium import ai_integration
+
+ai = ai_integration.MCPAIIntegration(provider="openai")
+
+# Generate test script
+test_goal = "Log in to the app, add an item to the cart, and verify it appears in the checkout screen"
+language = "python"  # or "java", "javascript", "csharp", "ruby"
+
+test_script = ai.generate_test_script(
+    test_goal=test_goal,
+    language=language,
+    app_name="Shopping App"
+)
+
+print(test_script)
+# Output: Complete Python test script with Appium code to perform the requested actions</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Natural Language Commands
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#aiCapabilitiesAccordion">
+                                <div class="accordion-body">
+                                    <p>Execute mobile testing actions using natural language commands without writing code manually.</p>
+                                    <pre><code class="language-python">from mcp_appium import client, ai_integration
+
+# Initialize client and AI integration
+appium_client = client.AppiumClient(...)
+session = appium_client.create_session()
+ai = ai_integration.MCPAIIntegration(provider="gemini")
+
+# Execute commands with natural language
+commands = [
+    "Enter testuser in the username field",
+    "Type password123 in the password field",
+    "Click the login button",
+    "Wait for the home screen to load",
+    "Verify that the welcome message contains Hello, testuser"
+]
+
+for command in commands:
+    actions = ai.interpret_command(command, session)
+    execute_actions(session, actions)</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

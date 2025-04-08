@@ -1,0 +1,15 @@
+This directory is for storing Android and iOS app files (.apk and .app) for testing with Appium.
+
+To use a custom app with the Docker setup:
+
+1. Place your .apk or .app file in this directory
+2. Set the environment variable in .env.docker:
+   - For Android: ANDROID_APP_PATH=/app/your-app.apk
+   - For iOS: IOS_APP_PATH=/app/your-app.app
+
+Note: If no app is specified, the examples will use the Android Settings app or 
+an iOS app path that doesn't exist, which will cause an error for iOS.
+
+Sample Apps for Testing:
+- For Android: You can download sample apps from https://github.com/appium/android-apidemos
+- For iOS: You can download sample apps from https://github.com/appium/ios-test-app

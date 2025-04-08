@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="row mb-5">
+        <div class="col-lg-12 text-center">
+            <h1 class="display-4 mb-4">MCP Appium</h1>
+            <p class="lead">A Python implementation of Model Context Protocol (MCP) for Appium</p>
+            <p>Version: 1.0.0</p>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-header">
+                    <h5>About MCP Appium</h5>
+                </div>
+                <div class="card-body">
+                    <p>MCP Appium is a Python implementation of the Model Context Protocol (MCP) for Appium, enabling structured mobile automation testing.</p>
+                    <p>The Model Context Protocol is a communication protocol that defines a way for testing tools to interact with applications. This implementation focuses on mobile testing with Appium.</p>
+                    <h6>Key Features:</h6>
+                    <ul>
+                        <li>Easy-to-use Python API for mobile automation testing</li>
+                        <li>Support for both Android and iOS platforms</li>
+                        <li>Structured approach to managing mobile app interactions</li>
+                        <li>Multi-provider AI integration (OpenAI, Gemini, Hugging Face, Ollama)</li>
+                        <li><span class="badge bg-primary">NEW</span> Multi-language code generation (Python, Java, JavaScript, C#, Ruby, Robot Framework)</li>
+                        <li>Comprehensive error handling and debugging tools</li>
+                        <li>Configurable server for hosting MCP endpoints</li>
+                        <li>Docker containerization for seamless deployment</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mb-5">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Getting Started</h5>
+                </div>
+                <div class="card-body">
+                    <h6>Quick Installation</h6>
+                    <div class="bg-dark text-light p-3 rounded mb-3">
+                        <code>pip install mcp-appium</code>
+                    </div>
+                    
+                    <h6 class="mt-4">Basic Usage</h6>
+                    <p>Start the MCP Appium server:</p>
+                    <div class="bg-dark text-light p-3 rounded mb-3">
+                        <code>python main.py --server</code>
+                    </div>
+                    
+                    <p>Or run the example that doesn't require an Appium server:</p>
+                    <div class="bg-dark text-light p-3 rounded mb-3">
+                        <code>python examples/mock_example.py</code>
+                    </div>
+                    
+                    <div class="mt-3 text-center">
+                        <a href="{{ url_for('examples') }}" class="btn btn-primary">
+                            <i class="bi bi-code-slash"></i> View More Examples
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="mb-4">Examples</h2>
+            {% if examples %}
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                    {% for file in examples %}
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5 class="card-title">{{ file }}</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">Example demonstrating MCP Appium functionality.</p>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{{ url_for('show_example', filename=file) }}" class="btn btn-primary">View Example</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info">No example files found.</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-lg-12 text-center">
+            <div class="d-grid gap-2 col-md-6 mx-auto">
+                <a href="/examples/android_example.py" class="btn btn-success btn-lg">
+                    <i class="bi bi-android"></i> Android Example
+                </a>
+                <a href="{{ url_for('comprehensive_example') }}" class="btn btn-primary btn-lg">
+                    <i class="bi bi-code-slash"></i> Comprehensive API Example <span class="badge bg-danger">New!</span>
+                </a>
+                <a href="{{ url_for('documentation') }}" class="btn btn-info btn-lg">
+                    <i class="bi bi-book"></i> View Documentation
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

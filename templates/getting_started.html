@@ -1,0 +1,272 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="row mb-5">
+        <div class="col-lg-12 text-center">
+            <h1 class="display-4 mb-4">Getting Started with MCP Appium</h1>
+            <p class="lead">Learn how to set up and use MCP Appium for mobile automation testing</p>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-10 offset-lg-1">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Installation</h5>
+                </div>
+                <div class="card-body">
+                    <p>MCP Appium can be installed in several ways:</p>
+                    
+                    <h6 class="mt-4">1. Using pip</h6>
+                    <div class="bg-dark text-light p-3 rounded mb-3">
+                        <code>pip install mcp-appium</code>
+                    </div>
+                    
+                    <h6 class="mt-4">2. Using Docker</h6>
+                    <p>We provide a Docker image with all dependencies pre-installed:</p>
+                    <div class="bg-dark text-light p-3 rounded mb-3">
+                        <code>docker pull mcp-appium/mcp-appium:latest</code>
+                    </div>
+                    <p>Or use Docker Compose with the provided docker-compose.yml:</p>
+                    <div class="bg-dark text-light p-3 rounded mb-3">
+                        <code>docker-compose up</code>
+                    </div>
+                    
+                    <h6 class="mt-4">3. From source</h6>
+                    <div class="bg-dark text-light p-3 rounded mb-3">
+                        <code>git clone https://github.com/mcp-appium/mcp-appium.git<br>
+                        cd mcp-appium<br>
+                        pip install -e .</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-10 offset-lg-1">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Quick Start Guide</h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="mt-2">1. Start the Appium Server</h6>
+                    <p>First, make sure you have Appium installed and running:</p>
+                    <div class="bg-dark text-light p-3 rounded mb-3">
+                        <code>appium</code>
+                    </div>
+                    
+                    <h6 class="mt-4">2. Install an Android Emulator or Connect a Device</h6>
+                    <p>You'll need an Android emulator or physical device connected to your system.</p>
+                    <div class="bg-dark text-light p-3 rounded mb-3">
+                        <code>adb devices</code>
+                    </div>
+                    
+                    <h6 class="mt-4">3. Start the MCP Appium Server</h6>
+                    <p>Start the MCP Appium server with:</p>
+                    <div class="bg-dark text-light p-3 rounded mb-3">
+                        <code>python main.py --server</code>
+                    </div>
+                    
+                    <h6 class="mt-4">4. Run a Simple Test</h6>
+                    <p>Try running one of the example scripts:</p>
+                    <div class="bg-dark text-light p-3 rounded mb-3">
+                        <code>python examples/mock_example.py</code>
+                    </div>
+                    <p>Or for a real device test:</p>
+                    <div class="bg-dark text-light p-3 rounded mb-3">
+                        <code>python examples/android_example.py</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-10 offset-lg-1">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Using the AI Integration</h5>
+                </div>
+                <div class="card-body">
+                    <p>MCP Appium comes with built-in AI capabilities powered by multiple providers:</p>
+                    
+                    <h6>Supported AI Providers:</h6>
+                    <ul>
+                        <li><strong>OpenAI (GPT-4o)</strong> - For natural language interactions and test generation</li>
+                        <li><strong>Google Gemini</strong> - Alternative AI provider with different strengths</li>
+                        <li><strong>Hugging Face</strong> - For using open-source models via API</li>
+                        <li><strong>Ollama</strong> - For running local LLMs without external API dependencies</li>
+                    </ul>
+                    
+                    <h6 class="mt-4">Setting Up AI Integration:</h6>
+                    <p>To use the AI integration features, set the appropriate environment variables:</p>
+                    <div class="bg-dark text-light p-3 rounded mb-3">
+                        <code># For OpenAI<br>
+                        export OPENAI_API_KEY=your_api_key<br><br>
+                        # For Google's Gemini<br>
+                        export GOOGLE_API_KEY=your_api_key<br><br>
+                        # For Hugging Face<br>
+                        export HUGGINGFACE_API_KEY=your_api_key<br><br>
+                        # For Ollama (local)<br>
+                        export OLLAMA_BASE_URL=http://localhost:11434</code>
+                    </div>
+                    
+                    <h6 class="mt-4">Sample Usage:</h6>
+                    <p>Here's a simple example of using the AI integration to generate a test script:</p>
+                    <div class="bg-dark text-light p-3 rounded mb-3">
+                        <code>python examples/code_generation_example.py --provider openai --test-goal "Test the login functionality"</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-10 offset-lg-1">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Multi-Language Support</h5>
+                </div>
+                <div class="card-body">
+                    <p>MCP Appium can generate test scripts in multiple languages and frameworks:</p>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card h-100 mb-3">
+                                <div class="card-header bg-primary bg-opacity-50">
+                                    <h6 class="mb-0">Python</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="small">Using Appium Python Client</p>
+                                    <div class="bg-dark text-light p-2 rounded small">
+                                        <code>python examples/code_generation_example.py --language python</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 mb-3">
+                                <div class="card-header bg-success bg-opacity-50">
+                                    <h6 class="mb-0">Java</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="small">Using Java-Client</p>
+                                    <div class="bg-dark text-light p-2 rounded small">
+                                        <code>python examples/code_generation_example.py --language java</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 mb-3">
+                                <div class="card-header bg-info bg-opacity-50">
+                                    <h6 class="mb-0">JavaScript</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="small">Using WebdriverIO</p>
+                                    <div class="bg-dark text-light p-2 rounded small">
+                                        <code>python examples/code_generation_example.py --language javascript</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <div class="card h-100 mb-3">
+                                <div class="card-header bg-warning bg-opacity-50">
+                                    <h6 class="mb-0">C#</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="small">Using Appium.WebDriver</p>
+                                    <div class="bg-dark text-light p-2 rounded small">
+                                        <code>python examples/code_generation_example.py --language csharp</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 mb-3">
+                                <div class="card-header bg-danger bg-opacity-50">
+                                    <h6 class="mb-0">Ruby</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="small">Using appium_lib</p>
+                                    <div class="bg-dark text-light p-2 rounded small">
+                                        <code>python examples/code_generation_example.py --language ruby</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 mb-3">
+                                <div class="card-header bg-primary bg-opacity-50">
+                                    <h6 class="mb-0">Robot Framework</h6>
+                                </div>
+                                <div class="card-body">
+                                    <p class="small">Using AppiumLibrary</p>
+                                    <div class="bg-dark text-light p-2 rounded small">
+                                        <code>python examples/code_generation_example.py --language robot</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-10 offset-lg-1">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Next Steps</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <a href="{{ url_for('documentation') }}" class="text-decoration-none">
+                                <div class="card h-100 bg-dark bg-opacity-75">
+                                    <div class="card-body text-center">
+                                        <i class="bi bi-book display-4 mb-3 text-primary"></i>
+                                        <h5>Read the Documentation</h5>
+                                        <p class="text-muted">Learn more about MCP Appium features and API</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="{{ url_for('examples') }}" class="text-decoration-none">
+                                <div class="card h-100 bg-dark bg-opacity-75">
+                                    <div class="card-body text-center">
+                                        <i class="bi bi-code-slash display-4 mb-3 text-success"></i>
+                                        <h5>Explore the Examples</h5>
+                                        <p class="text-muted">Review sample scripts to understand the API</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="{{ url_for('api') }}" class="text-decoration-none">
+                                <div class="card h-100 bg-dark bg-opacity-75">
+                                    <div class="card-body text-center">
+                                        <i class="bi bi-diagram-3 display-4 mb-3 text-info"></i>
+                                        <h5>API Reference</h5>
+                                        <p class="text-muted">View detailed API documentation for all features</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

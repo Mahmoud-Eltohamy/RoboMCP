@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mb-4">MCP Appium Documentation</h1>
+    <p class="lead">Comprehensive documentation for the MCP Appium implementation.</p>
+
+    <div class="row mt-4">
+        <div class="col-lg-12">
+            {% if docs %}
+                <div class="list-group">
+                    {% for doc in docs %}
+                        <a href="#" class="list-group-item list-group-item-action">
+                            {{ doc }}
+                        </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info">No documentation files found.</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Getting Started</h3>
+                </div>
+                <div class="card-body">
+                    <h4>Installation</h4>
+                    <pre><code class="language-bash">pip install mcp-appium</code></pre>
+                    
+                    <h4 class="mt-4">Basic Usage</h4>
+                    <pre><code class="language-python">from mcp_appium import client
+
+# Initialize the client
+appium_client = client.AppiumClient(
+    appium_url="http://localhost:4723",
+    capabilities={
+        "platformName": "Android",
+        "appium:automationName": "UiAutomator2",
+        "appium:deviceName": "Android Emulator",
+        "appium:app": "/path/to/your/app.apk"
+    }
+)
+
+# Connect to the device
+session = appium_client.create_session()
+
+# Find and interact with elements
+el = session.find_element("id", "login_button")
+el.click()
+
+# Take a screenshot
+screenshot = session.get_screenshot()
+
+# Close the session
+session.quit()
+</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-okaidia.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+{% endblock %}

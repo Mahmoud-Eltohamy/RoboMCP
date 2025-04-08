@@ -1,0 +1,125 @@
+version: '3'
+
+services:
+  # Appium Server
+  appium:
+    image: appium/appium:latest
+    container_name: appium-server
+    privileged: true
+    depends_on:
+      - android-emulator
+    environment:
+      - APPIUM_HOST=0.0.0.0
+      - APPIUM_PORT=4723
+    ports:
+      - "4723:4723"
+    volumes:
+      - ./app:/app
+      - ./data:/data
+    networks:
+      - appium-network
+    command: appium --allow-insecure chromedriver_autodownload --relaxed-security
+
+  # Android Emulator
+  android-emulator:
+    image: budtmo/docker-android:emulator_11.0
+    container_name: android-emulator
+    privileged: true
+    ports:
+      - "6080:6080" # NoVNC web interface port
+      - "5554:5554" # Emulator port
+      - "5555:5555" # ADB port
+    environment:
+      - DEVICE=Samsung Galaxy S10
+      - APPIUM=false # We're using a separate Appium container
+      - APPIUM_HOST=appium
+      - APPIUM_PORT=4723
+      - EMULATOR_ARGS=-no-snapshot-save -no-window -gpu swiftshader_indirect -memory 2048
+      - WEB_VNC=true
+    volumes:
+      - ./app:/root/tmp/app
+    networks:
+      - appium-network
+
+  # Playwright Browser Container
+  browser:
+    image: mcr.microsoft.com/playwright:latest
+    container_name: playwright-browser
+    ports:
+      - "9222:9222"  # Chrome DevTools Protocol port
+    environment:
+      - DISPLAY=:99
+    volumes:
+      - ./data:/data
+    networks:
+      - appium-network
+    shm_size: 2gb  # Shared memory for browsers
+    restart: unless-stopped
+    # Start a persistent browser in headless mode with remote debugging enabled
+    command: >
+      bash -c "
+        cd /data && 
+        mkdir -p /data/logs && 
+        playwright install chromium && 
+        python -c \"
+import asyncio
+from playwright.async_api import async_playwright
+
+async def run_browser():
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(
+            headless=True,
+            args=['--remote-debugging-port=9222', '--remote-debugging-address=0.0.0.0', '--no-sandbox']
+        )
+        # Keep the browser running
+        print('Browser started with remote debugging at ws://browser:9222')
+        while True:
+            await asyncio.sleep(600)  # Check every 10 minutes
+
+asyncio.run(run_browser())
+        \"
+      "
+
+  # Ollama Service for Local LLMs
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama-service
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - appium-network
+    restart: unless-stopped
+
+  # MCP Appium Application
+  mcp-appium:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mcp-appium
+    depends_on:
+      - appium
+      - android-emulator
+      - ollama
+      - browser
+    environment:
+      - APPIUM_URL=http://appium:4723
+      - MCP_PORT=5000
+      - MCP_LOG_LEVEL=DEBUG
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - BROWSER_WS_ENDPOINT=ws://browser:9222
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    networks:
+      - appium-network
+    command: python main.py --server
+
+networks:
+  appium-network:
+    driver: bridge
+
+volumes:
+  ollama_data:

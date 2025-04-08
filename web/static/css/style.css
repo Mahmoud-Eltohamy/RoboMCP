@@ -1,0 +1,116 @@
+/* 
+ * MCP Appium Streamlit Interface Styles
+ * Custom CSS for the Streamlit interface
+ */
+
+.stApp {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.code-block {
+    background-color: #f0f2f6;
+    border-radius: 5px;
+    padding: 10px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    overflow-x: auto;
+}
+
+.info-box {
+    background-color: #e1f5fe;
+    border-left: 5px solid #039be5;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.version-badge {
+    background-color: #039be5;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+}
+
+/* Improve appearance of expanders */
+.streamlit-expanderHeader {
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+/* Improve sidebar appearance */
+section[data-testid="stSidebar"] {
+    background-color: #f8f9fa;
+    padding: 1rem;
+}
+
+/* Fix dark mode issues */
+@media (prefers-color-scheme: dark) {
+    .info-box {
+        background-color: #263238;
+        border-left-color: #00bcd4;
+    }
+    
+    .code-block {
+        background-color: #263238;
+    }
+    
+    section[data-testid="stSidebar"] {
+        background-color: #1e1e1e;
+    }
+}
+
+/* Improve tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+}
+
+/* Badges styling */
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.6em;
+    font-size: 75%;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 10px;
+    color: white;
+    background-color: #039be5;
+}
+
+.badge-primary {
+    background-color: #039be5;
+}
+
+.badge-success {
+    background-color: #4caf50;
+}
+
+.badge-warning {
+    background-color: #ff9800;
+}
+
+.badge-danger {
+    background-color: #f44336;
+}
